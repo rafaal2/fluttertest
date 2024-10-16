@@ -30,6 +30,7 @@ flutter:
   assets:
      - assets/icons/arrow_back_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg
      - assets/icons/more_horiz_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg
+     - assets/icons/inventory_2_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
