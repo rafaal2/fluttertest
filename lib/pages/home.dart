@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertest/models/categoryModel.dart';
+import 'package:fluttertest/pages/testScreen.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
@@ -21,7 +22,11 @@ class HomePage extends StatelessWidget {
         children: [
           buildContainer(),
           SizedBox(height: 30),
-          buildColumn()
+          buildColumn(),
+          ElevatedButton(onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (_) => testScreen(),),);
+          }
+              , child: Text("CLICA"))
         ],
       ),
     );
