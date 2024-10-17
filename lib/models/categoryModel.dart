@@ -13,7 +13,7 @@ class CategoryModel {
 
     categories.add(
         CategoryModel(
-            name: 'Salad',
+            name: 'roupas',
             iconPath: 'assets/icons/inventory_2_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg',
             boxColor: Color(0xff9DCEFF)
         )
@@ -21,7 +21,7 @@ class CategoryModel {
 
     categories.add(
         CategoryModel(
-            name: 'Cake',
+            name: 'casa',
             iconPath: 'assets/icons/inventory_2_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg',
             boxColor: Color(0xffEEA4CE)
         )
@@ -29,7 +29,7 @@ class CategoryModel {
 
     categories.add(
         CategoryModel(
-            name: 'Pie',
+            name: 'eletronicos',
             iconPath: 'assets/icons/inventory_2_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg',
             boxColor: Color(0xff9DCEFF)
         )
@@ -37,7 +37,7 @@ class CategoryModel {
 
     categories.add(
         CategoryModel(
-            name: 'Smoothies',
+            name: 'decoraçoes',
             iconPath: 'assets/icons/inventory_2_24dp_E8EAED_FILL0_wght400_GRAD0_opsz24.svg',
             boxColor: Color(0xffEEA4CE)
         )

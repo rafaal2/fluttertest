@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:fluttertest/models/categoryModel.dart';
 
 class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+  HomePage({super.key});
+
+  List<CategoryModel> categories = [];
+
+  void _getGategories(){
+    categories = CategoryModel.getCategories();
+  }
 
   @override
   Widget build(BuildContext context) {
+    _getGategories();
     return Scaffold(
       appBar: buildAppBar(),
       backgroundColor: Colors.white,
@@ -13,22 +21,36 @@ class HomePage extends StatelessWidget {
         children: [
           buildContainer(),
           SizedBox(height: 30),
-          Column(crossAxisAlignment: CrossAxisAlignment.start ,
-            children: [Padding(
-              padding: const EdgeInsets.only(left: 25),
-              child: Text("categorias",
-                        style: TextStyle(color: Colors.orangeAccent, fontSize: 18, fontWeight: FontWeight.w600),),
-            ),
-              SizedBox(height: 15,),
-              Container(height: 150, color: Colors.green,
-              child: ListView.builder(itemBuilder: (context, index){
-                return Container();
-              }),)
-          ],
-          )
+          buildColumn()
         ],
       ),
     );
+  }
+
+  Column buildColumn() {
+    return Column(crossAxisAlignment: CrossAxisAlignment.start ,
+          children: [const Padding(
+            padding: EdgeInsets.only(left: 25),
+            child: Text("categorias",
+                      style: TextStyle(color: Colors.orangeAccent, fontSize: 18, fontWeight: FontWeight.w600),),
+          ),
+            SizedBox(height: 15,),
+            Container(height: 120,
+            child: ListView.separated(
+                itemCount: categories.length ,
+                scrollDirection: Axis.horizontal ,
+                padding: EdgeInsets.only(left: 20, right: 20),
+                separatorBuilder: (context, index) => SizedBox(width: 25,),
+                itemBuilder: (context, index){
+              return Container(
+                width: 100,
+                decoration: BoxDecoration(color: categories[index].boxColor.withOpacity(1),
+                borderRadius: BorderRadius.circular(16)),
+                  child: Text(categories[index].name,textAlign: TextAlign.center,style: TextStyle(fontSize: 15,))
+              );
+            }),)
+        ],
+        );
   }
 
   Container buildContainer() {

@@ -10,7 +10,7 @@ class flutterApp extends StatelessWidget{
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: const HomePage(),
+    return MaterialApp(home: HomePage(),
       debugShowCheckedModeBanner: false,
       theme: ThemeData(fontFamily: "poppins"),);
   }
