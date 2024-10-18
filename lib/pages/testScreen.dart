@@ -8,6 +8,18 @@ class testScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.red,
+      appBar: AppBar(
+        title: Text('Minha Página'),
+      ),
+      body: Center(
+        child: Text('Conteúdo da Página'),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // Ação a ser realizada
+        },
+        child: Icon(Icons.add),
+      ),
     );
+
   }}

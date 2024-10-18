@@ -20,9 +20,7 @@ class HomePage extends StatelessWidget {
       backgroundColor: Colors.white,
       body: Column(crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          buildContainer(),
           SizedBox(height: 30),
-          buildColumn(),
           ElevatedButton(onPressed: (){
             Navigator.push(context, MaterialPageRoute(builder: (_) => testScreen(),),);
           }
@@ -30,53 +28,6 @@ class HomePage extends StatelessWidget {
         ],
       ),
     );
-  }
-
-  Column buildColumn() {
-    return Column(crossAxisAlignment: CrossAxisAlignment.start ,
-          children: [const Padding(
-            padding: EdgeInsets.only(left: 25),
-            child: Text("categorias",
-                      style: TextStyle(color: Colors.orangeAccent, fontSize: 18, fontWeight: FontWeight.w600),),
-          ),
-            SizedBox(height: 15,),
-            Container(height: 120,
-            child: ListView.separated(
-                itemCount: categories.length ,
-                scrollDirection: Axis.horizontal ,
-                padding: EdgeInsets.only(left: 20, right: 20),
-                separatorBuilder: (context, index) => SizedBox(width: 25,),
-                itemBuilder: (context, index){
-              return Container(
-                width: 100,
-                decoration: BoxDecoration(color: categories[index].boxColor.withOpacity(1),
-                borderRadius: BorderRadius.circular(16)),
-                  child: Text(categories[index].name,textAlign: TextAlign.center,style: TextStyle(fontSize: 15,))
-              );
-            }),)
-        ],
-        );
-  }
-
-  Container buildContainer() {
-    return Container(
-          margin: EdgeInsets.only(top: 40, left: 20, right: 20),
-          decoration: BoxDecoration(boxShadow: [
-            BoxShadow(
-                color: const Color(0xff1D1617).withOpacity(0.11),
-                blurRadius: 40,
-                spreadRadius: 0.0)
-          ]),
-          child: TextField(
-              decoration: InputDecoration(
-            filled: true,
-            fillColor: Colors.white,
-            hintText: "procurar", hintStyle: TextStyle(color: Colors.orangeAccent, fontSize: 16),
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(15),
-                borderSide: BorderSide.none),
-          )),
-        );
   }
 
   AppBar buildAppBar() {
