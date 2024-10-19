@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "247287104274",
+    "project_id": "crudtester-76497",
+    "storage_bucket": "crudtester-76497.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:247287104274:android:38eb5ee41c7eb6a1c7a9cb",
+        "android_client_info": {
+          "package_name": "com.example.fluttertest"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBtN8AZnuVzbQ1n0hO5RkA2jDGQBxXy4eM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
