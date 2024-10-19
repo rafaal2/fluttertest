@@ -1,30 +1,46 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertest/models/categoryModel.dart';
 import 'package:fluttertest/pages/testScreen.dart';
+import 'package:fluttertest/services/firestore.dart';
 
 class HomePage extends StatelessWidget {
   HomePage({super.key});
+  final FirestoreService firestoreService = FirestoreService();
+  final TextEditingController textController = TextEditingController();
 
   List<CategoryModel> categories = [];
 
-  void _getGategories(){
-    categories = CategoryModel.getCategories();
+  void openNoteBox(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: TextField(
+          controller: textController,
+        ),
+        actions: [ElevatedButton(onPressed: () {
+          firestoreService.addNote(textController.text);
+          textController.clear();
+          Navigator.pop(context);
+        }, child: Text("adicionar"))],
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    _getGategories();
     return Scaffold(
       appBar: buildAppBar(),
       backgroundColor: Colors.white,
-      body: Column(crossAxisAlignment: CrossAxisAlignment.start,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 30),
-          ElevatedButton(onPressed: (){
-            Navigator.push(context, MaterialPageRoute(builder: (_) => testScreen(),),);
-          }
-              , child: Text("CLICA"))
+          ElevatedButton(
+            onPressed: () => openNoteBox(context),  // Passando o 'context' aqui
+            child: Text("CLICA"),
+          ),
         ],
       ),
     );
