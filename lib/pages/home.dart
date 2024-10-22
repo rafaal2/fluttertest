@@ -19,11 +19,15 @@ class HomePage extends StatelessWidget {
         content: TextField(
           controller: textController,
         ),
-        actions: [ElevatedButton(onPressed: () {
-          firestoreService.addNote(textController.text);
-          textController.clear();
-          Navigator.pop(context);
-        }, child: Text("adicionar"))],
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                firestoreService.addNote(textController.text);
+                textController.clear();
+                Navigator.pop(context);
+              },
+              child: Text("adicionar"))
+        ],
       ),
     );
   }
@@ -37,13 +41,52 @@ class HomePage extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           SizedBox(height: 30),
-          ElevatedButton(
-            onPressed: () => openNoteBox(context),  // Passando o 'context' aqui
-            child: Text("CLICA"),
+          Padding(
+            padding: const EdgeInsets.only(left: 10),
+            child: ElevatedButton(
+              onPressed: () => openNoteBox(context),
+              child: Text("CLICA"),
+            ),
+          ),
+          SizedBox(height: 20),
+          Expanded(
+            child: buildStreamBuilder(),
           ),
         ],
       ),
     );
+  }
+
+  StreamBuilder<QuerySnapshot<Object?>> buildStreamBuilder() {
+    return StreamBuilder<QuerySnapshot>(
+            stream: firestoreService.getNotesStream(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return Center(child: CircularProgressIndicator());
+              }
+              if (snapshot.hasError) {
+                return Center(child: Text("Erro ao carregar as notas"));
+              }
+              if (!snapshot.hasData || snapshot.data!.docs.isEmpty) {
+                return Center(child: Text("Nenhuma nota disponível"));
+              }
+
+              final notes = snapshot.data!.docs;
+
+              return ListView.builder(
+                itemCount: notes.length,
+                itemBuilder: (context, index) {
+                  final note = notes[index].get('note') as String;
+                  //final timestamp =
+                      //notes[index].get('timestamp') as Timestamp;
+                  return ListTile(
+                    title: Text(note),
+                    //subtitle: Text(timestamp.toDate().toString()),
+                  );
+                },
+              );
+            },
+          );
   }
 
   AppBar buildAppBar() {
