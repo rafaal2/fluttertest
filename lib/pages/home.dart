@@ -26,7 +26,7 @@ class HomePage extends StatelessWidget {
             padding: const EdgeInsets.only(left: 10),
             child: ElevatedButton(
               onPressed: () => openNoteBox(context),
-              child: Text("CLICA"),
+              child: Text("adcionar nota", style: TextStyle(color: Colors.orangeAccent),),
             ),
           ),
           SizedBox(height: 20),
@@ -42,6 +42,7 @@ class HomePage extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
+        title: Text("adicionar/editar"),
         content: TextField(
           controller: textController,
         ),
@@ -81,12 +82,18 @@ class HomePage extends StatelessWidget {
               return ListView.builder(
                 itemCount: notes.length,
                 itemBuilder: (context, index) {
+                  DocumentSnapshot document = notes[index];
+                  String docID = document.id;
                   final note = notes[index].get('note') as String;
-                  //final timestamp =
-                      //notes[index].get('timestamp') as Timestamp;
                   return ListTile(
                     title: Text(note),
-                    //subtitle: Text(timestamp.toDate().toString()),
+                    trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children:[
+                    IconButton(onPressed: () => openNoteBox(context, docID: docID), icon: const Icon(Icons.settings)),
+                    IconButton(onPressed: () => firestoreService.deleteNote(docID), icon: const Icon(Icons.delete)),
+
+                    ])
                   );
                 },
               );
