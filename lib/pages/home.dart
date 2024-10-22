@@ -12,25 +12,6 @@ class HomePage extends StatelessWidget {
 
   List<CategoryModel> categories = [];
 
-  void openNoteBox(BuildContext context) {
-    showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        content: TextField(
-          controller: textController,
-        ),
-        actions: [
-          ElevatedButton(
-              onPressed: () {
-                firestoreService.addNote(textController.text);
-                textController.clear();
-                Navigator.pop(context);
-              },
-              child: Text("adicionar"))
-        ],
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,6 +33,30 @@ class HomePage extends StatelessWidget {
           Expanded(
             child: buildStreamBuilder(),
           ),
+        ],
+      ),
+    );
+  }
+
+  void openNoteBox(BuildContext context, {String? docID}) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        content: TextField(
+          controller: textController,
+        ),
+        actions: [
+          ElevatedButton(
+              onPressed: () {
+                if(docID == null){
+                  firestoreService.addNote(textController.text);
+                }else{
+                  firestoreService.updateNote(docID, textController.text);
+                }
+                textController.clear();
+                Navigator.pop(context);
+              },
+              child: Text("adicionar"))
         ],
       ),
     );
