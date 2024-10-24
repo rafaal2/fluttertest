@@ -2,7 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertest/models/categoryModel.dart';
-import 'package:fluttertest/pages/testScreen.dart';
 import 'package:fluttertest/services/firestore.dart';
 
 class HomePage extends StatelessWidget {
@@ -17,23 +16,33 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: buildAppBar(),
-      backgroundColor: Colors.white,
-      body: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 30),
-          Padding(
-            padding: const EdgeInsets.only(left: 10),
-            child: ElevatedButton(
-              onPressed: () => openNoteBox(context),
-              child: Text("adcionar nota", style: TextStyle(color: Colors.orangeAccent),),
+      body: Container(
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: NetworkImage(
+              "https://img.freepik.com/vetores-premium/vetor-de-papel-de-parede-de-celular-de-fundo-de-padrao-geometrico-branco-e-cinza_53876-170009.jpg",
             ),
+            fit: BoxFit.cover,
           ),
-          SizedBox(height: 20),
-          Expanded(
-            child: buildStreamBuilder(),
-          ),
-        ],
+        ),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            SizedBox(height: 30),
+            Padding(
+              padding: const EdgeInsets.only(left: 10),
+              child: ElevatedButton.icon(
+                onPressed: () => openNoteBox(context),
+                icon: Icon(Icons.add_circle),
+                label: Text("adcionar nota", style: TextStyle(color: Colors.orangeAccent),),
+              ),
+            ),
+            SizedBox(height: 20),
+            Expanded(
+              child: buildNoteList(),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -63,7 +72,7 @@ class HomePage extends StatelessWidget {
     );
   }
 
-  StreamBuilder<QuerySnapshot<Object?>> buildStreamBuilder() {
+  StreamBuilder<QuerySnapshot<Object?>> buildNoteList() {
     return StreamBuilder<QuerySnapshot>(
             stream: firestoreService.getNotesStream(),
             builder: (context, snapshot) {
