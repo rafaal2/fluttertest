@@ -102,7 +102,8 @@ class HomePage extends StatelessWidget {
                     IconButton(onPressed: () => openNoteBox(context, docID: docID), icon: const Icon(Icons.settings)),
                     IconButton(onPressed: () => firestoreService.deleteNote(docID), icon: const Icon(Icons.delete)),
 
-                    ])
+                    ]
+                    )
                   );
                 },
               );
